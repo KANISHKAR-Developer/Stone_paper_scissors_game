@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stone_Paper_Scissors-game</title>
+    <link rel="icon" href="smartphone-call.png">
+    <style>
+        *{
+            padding: 0;margin: 0;box-sizing: border-box;
+            font-weight: bold;
+            font-variant-caps: titling-caps;
+            
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            background-color: rebeccapurple;
+            background-color: #222242;
+        }
+        .container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size:cover;
+            background-position: center;
+
+        }
+        /* .heading{
+            margin-bottom:5%;
+        } */
+        .box{
+            /* border: 1px solid black; */
+            width: 400px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction:column;
+            border-radius: 25px;
+            box-shadow: 0px 0px 8px 0px rebeccapurple;
+           
+            
+        }
+        button{
+            /* padding: 10px 25px;
+            border: none;
+            outline: none;
+            font-size: medium;
+            border-radius: 5px;
+            margin-left: 5px;
+            box-shadow: 0px 0px 10px  #f6b400 ;
+            opacity: .8; */
+            background-color: #222242;
+            padding: 10px 25px;
+            border: 1px solid #A9A9A9;
+            border-radius: 5px;
+            color: #fff;
+            transition: all.2s ease;
+            outline: 0;
+            font-size: medium;
+            margin-left: 5px;
+        
+        }
+        /* button:hover{
+            opacity: 1;
+             background-color: black; 
+            box-shadow: inset 80px 0px black, inset -80px 0px black;
+            transition: .5s ease-in;
+            color: whitesmoke;
+        } */
+
+        button:hover,button:focus{
+            border-color: #f6b400;
+            color: #f6b400;
+            box-shadow: 0px 4px 27px -12px #f6b400;
+        }
+
+        .result{
+            margin-bottom: 10%;
+            width: 300px;
+            height: 100px;
+            border: 1px solid #151538;
+            text-align: center;
+            font-weight: bold;
+            font-variant-caps: titling-caps;
+            font-size: larger;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: royalblue;
+            background-color: #151538;
+            color: wheat;
+            /* font-weight: bold; */
+            /* font-variant-caps:all-petite-caps; */
+            font-size: x-large;
+            font-variant-caps: petite-caps;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 5px;
+            box-shadow: inset 3px 6px 15px 3px rebeccapurple, inset -3px -6px 15px 3px  rebeccapurple;;
+        
+        }
+        .btns{
+            margin-bottom: 5%;
+        }
+        .mainresult{
+            width: 200px;
+            height: 60px;
+            border: 1px solid #151538;
+            margin-top: 10%;
+            background-color: hotpink;
+            background-color: royalblue;
+            background-color: #151538;
+            font-weight: bold;
+            /* font-variant-caps: titling-caps; */
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            color: wheat;
+            box-shadow: inset 3px 6px 15px  rebeccapurple, inset -3px -6px 15px  rebeccapurple;;
+        }
+        .playerimg{
+            width: 100px;
+            height: 100px;
+            border: 1px solid #151538;
+            position: absolute;
+            left: 20%;
+            /* display:none; */
+            border-radius: 20px;
+            /* box-shadow: 0px 0px 8px 1px black; */
+        }
+        .playerimg::before{
+            content: "";
+            width: 100px;
+            height: 100px;
+            /* background-color: red; */
+            position: absolute;
+            border-radius: 20px;
+            z-index: -1;
+            animation: shine 3s infinite ;
+        }
+        .botimg{
+            width: 100px;
+            height: 100px;
+            border: 1px solid #151538;
+            position: absolute;
+            right: 20%;
+            border-radius: 20px;
+            /* box-shadow: 0px 0px 8px 1px black; */
+            z-index: 9999;
+        }
+        .botimg::before{
+            content: "";
+            width: 100px;
+            height: 100px;
+            /* background-color: red; */
+            position: absolute;
+            border-radius: 20px;
+            z-index: -1;
+            animation: shine 3s infinite ;
+        }
+        @keyframes shine {
+            0% ,100%{
+                box-shadow: 0px 0px 42px -15px  rebeccapurple ;
+            }
+            50%{
+                box-shadow: 0px 0px 42px -5px  rebeccapurple;
+            }
+            
+        }
+        .player{
+            position: absolute;
+            top:36%;
+            left:18%;
+            color: #f6b400;
+            font-weight: bolder;
+            font-size: xx-large;
+        }
+        .bot{
+            position:absolute;
+            top: 36%;
+            right: 18%;
+            color:#f6b400;
+            font-weight: bolder;
+            font-size: xx-large;
+        }
+        h1{
+            position: absolute;
+            top:3%;
+            font-weight: bolder;
+            font-size:xx-large;
+            color: #f6b400;
+        }
+        .btn-reset{
+        display:flex;
+        justify-content:space-around;
+        align-items: center;
+        } 
+        .btn-reset img{
+            margin-left: 12px;
+            display: none;
+            
+        }
+        .btn-reset:hover img{
+            display: block;
+            transition: 1s;
+            
+        }
+    </style>
+
+    
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+<!-- Latest compiled JavaScript -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
+
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Stone Paper Scissors</h1>
+        <h2 class="player">Player Score :0</h2>
+        <h2 class="bot">Bot Score :0</h2>
+            <div class="box">
+
+                <div class="playerimg">
+                
+                </div>
+
+                    <div class="result">
+
+                    </div>
+          
+                        <div class="btns">
+                            <button class="stone">Stone</button>
+                            <button class="paper">Paper</button>
+                            <button class="scisor">Scissor</button>
+                        </div>
+
+                            <!-- <button onclick="letsPlay()">click</button> -->
+                         <button class="btn-reset" style="margin-top: 5%;">PlayAgain<img src="refresh.png" alt="" width="18px" height="18px">
+                         </button>
+                
+                        <div class="mainresult">
+
+                        </div>
+
+                    <div class="botimg">
+
+                </div>
+
+            </div>
+        
+    </div>
+
+    <script>
+        // function letsPlay(){
+            let getResult = document.querySelector('.result');
+            getStone = document.querySelector('.stone');
+            getPaper = document.querySelector('.paper');
+            getScisor = document.querySelector('.scisor');  
+            getBtnReset=document.querySelector('.btn-reset');
+            getMainResult=document.querySelector(".mainresult")
+            let playerImg = document.querySelector('.playerimg');
+            let botImg = document.querySelector('.botimg')
+            let playerScore = document.querySelector('.player')
+            let botScore = document.querySelector('.bot')
+            Playerextrazero = 1;
+            botextrazero = 1;
+            let containerget = document.querySelector('.container')
+            
+            getBtnReset.addEventListener('click',()=>{
+            
+                location.reload();
+              
+            })
+        
+            getStone.addEventListener('click',()=>{
+                
+                playerImg.style.backgroundImage="url('stone100.jpg')"
+                playerImg.style.display="block";
+                botValue()
+              
+                                            
+                if(botRandomValue==1){
+                    
+                    botImg.style.backgroundImage="url('stone100.jpg')"
+                    botImg.style.display="block";
+
+                  
+                    getMainResult.innerHTML="bot also chose stone "
+                    // console.log(botRandomValue);
+                    getResult.innerHTML="MATCH IS DRAW"
+                   
+                    
+                }
+                else if(botRandomValue==2){
+                    
+                    botImg.style.backgroundImage="url('paper100px.jpg')"
+                    botImg.style.display="block";
+
+                    getMainResult.innerHTML="bot chose paper"
+                    // console.log(botRandomValue);
+                    getResult.innerHTML="YOU LOOSE"
+
+                    botScore.innerHTML="Bot Score :"+botextrazero
+                    botextrazero++;
+
+                    if(botextrazero>5){
+                        window.location="lose.html"
+                    }
+                                        
+                }
+                else if(botRandomValue==3){
+
+                    botImg.style.backgroundImage="url('scissor100px.png')"
+                    botImg.style.display="block";
+
+                    getMainResult.innerHTML="bot chose scissor"
+                    // console.log(botRandomValue);
+                    getResult.innerHTML="YOU WIN"
+
+                    playerScore.innerHTML="Player Score :"+ Playerextrazero
+                    Playerextrazero++;
+
+                    if(Playerextrazero>5){
+                        // containerget.style.backgroundImage="url('giphy.gif')";
+                        // containerget.style.backgroundRepeat="no-repeat";
+                        window.location="win.html"
+                    }
+                }
+                scorePoint()
+              
+            })
+
+            getPaper.addEventListener('click',()=>{
+
+                playerImg.style.backgroundImage="url('paper100px.jpg')"
+                playerImg.style.display="block";
+                botValue()
+              if(botRandomValue==1){
+                    
+                    botImg.style.backgroundImage="url('stone100.jpg')"
+                    botImg.style.display="block";
+
+                  getMainResult.innerHTML="bot chose stone "
+                //   console.log(botRandomValue);
+                  getResult.innerHTML="YOU WIN"
+
+                  playerScore.innerHTML="Player Score :"+ Playerextrazero
+                    Playerextrazero++;
+
+                    if(Playerextrazero>5){
+                        // containerget.style.backgroundImage="url('giphy.gif')";
+                        // containerget.style.backgroundRepeat="no-repeat";
+                        window.location="win.html"
+                    }
+
+              }
+              else if(botRandomValue==2){
+
+                    botImg.style.backgroundImage="url('paper100px.jpg')"
+                    botImg.style.display="block";
+
+                  getMainResult.innerHTML="bot also chose paper "
+                //   console.log(botRandomValue);
+                  getResult.innerHTML="MATCH IS DRAW"
+                }
+              else if(botRandomValue==3){
+
+                    botImg.style.backgroundImage="url('scissor100px.png')"
+                    botImg.style.display="block";
+
+                  getMainResult.innerHTML="bot chose scissor"
+                //   console.log(botRandomValue);
+                  getResult.innerHTML="YOU LOOSE"
+
+                  botScore.innerHTML="Bot Score :"+botextrazero
+                    botextrazero++;
+
+                    if(botextrazero>5){
+                        window.location="lose.html"
+                    }
+
+                }
+               
+          })
+
+          getScisor.addEventListener('click',()=>{
+              
+            playerImg.style.backgroundImage="url('scissor100px.png')"
+                playerImg.style.display="block";
+              botValue()
+              if(botRandomValue==1){
+
+                    botImg.style.backgroundImage="url('stone100.jpg')"
+                    botImg.style.display="block";
+
+                  getMainResult.innerHTML="bot chose stone "
+                //   console.log(botRandomValue);
+                  getResult.innerHTML="YOU LOOSE"
+
+                  botScore.innerHTML="Bot Score :"+botextrazero
+                    botextrazero++;
+
+                    if(botextrazero>5){
+                        window.location="lose.html"
+                    }
+
+              }
+              else if(botRandomValue==2){
+
+                    botImg.style.backgroundImage="url('paper100px.jpg')"
+                    botImg.style.display="block";
+
+                  getMainResult.innerHTML="bot chose paper "
+                //   console.log(botRandomValue);
+                  getResult.innerHTML="YOU WIN"
+
+                  playerScore.innerHTML="Player Score :"+ Playerextrazero
+                    Playerextrazero++;
+
+
+                    if(Playerextrazero>5){
+                        // containerget.style.backgroundImage="url('giphy.gif')";
+                        // containerget.style.backgroundRepeat="no-repeat";
+                        window.location="win.html"
+                    }
+
+                }
+              else if(botRandomValue==3){
+
+                    botImg.style.backgroundImage="url('scissor100px.png')"
+                    botImg.style.display="block";
+
+                  getMainResult.innerHTML="bot also chose scissor"
+                    // console.log(botRandomValue);
+                    getResult.innerHTML="MATCH IS DRAW"
+                    
+                }
+          })
+
+     
+   
+        // }
+
+   
+
+        function botValue(){
+            // let botgetValue
+            // let botRandomValue;
+            botRandomValue=( Math.floor(Math.random()*3+1));
+            // return botgetValue(botRandomValue)
+          
+        } 
+            // botValue()
+     
+        // console.log(botRandomValue);
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>win</title>
+    <link rel="icon" href="smartphone-call.png">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            background-color:rgba(0, 0, 0, 0.925);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            /* background: url("win.jfif");
+            background-repeat: no-repeat;
+            background-size: cover; */
+        }
+        h1{
+            margin-top: 0;
+            margin-bottom: 40px;
+            font-size: xxx-large;
+            color: rgba(255, 217, 0, 0.747);
+            animation: textmove infinite 5s;
+            transition: 1s;
+        }
+        @keyframes textmove {
+            0%{
+                transform: skew(0deg);
+            }
+            50%{
+                transform: skewX(-30deg);
+                
+            }
+            100%{
+                transform: skewX(0deg);
+            }
+            
+        }
+        .winposter{
+            height: 500px;
+            width: 500px;
+            /* border: 1px solid wheat; */
+            border-radius: 20px;
+            position: relative;
+        }
+        .winposter::before{
+            content: " ";
+            height: 500px;
+            width: 500px;
+            position: absolute;
+            border-radius: 20px;
+            /* background-color: red; */
+            animation: glow 3s infinite ;
+        }
+        @keyframes glow {
+        0%,100%{
+            box-shadow: 0px 0px 42px -12px gold;
+        }            
+        50%{
+            box-shadow:0px 0px 42px 3px gold;
+        }
+        }
+        .winposter img{
+            border-radius: 20px;
+        }
+
+        .playAgain{
+            margin-top: 20px;
+            position: relative;
+            left:35%;
+            padding: 10px 25px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            font-size: medium;
+            background-color:green;
+            color: white;
+        }
+        .playAgain:hover{
+            transition: .5s;
+            color:green;
+            border: 1px solid green;
+            box-shadow: inset 140px 0px 12px white;
+        }
+    </style>
+</head>
+<body>
+    <h1> YOU WON THE MATCH</h1>
+    <div class="winposter">
+       
+        <img src="winnerwinnerchickendinner.webp" alt="win" width="500px" height="500px" >
+        <button class="playAgain">Play Again</button>
+    </div>
+    <script>
+        let getbtn = document.querySelector('.playAgain');
+        getbtn.addEventListener('click',()=>{
+            window.location="index.html"
+        })
+        
+    </script>
+</body>
+</html>
